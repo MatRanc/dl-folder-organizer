@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 from glob import glob
 from pathlib import Path
@@ -7,17 +8,33 @@ from pathlib import Path
 path = os.getcwd()
 print ("The current working directory is %s" % path)
 
-#make screenshots folder
-print("Making screenshots folder")
-screenshots_folder = "screenshots/"
-os.makedirs("screenshots")
-print("Screenshots folder created")
+def confirmation():
+    print("Would you like to continue? (y/n)")
 
-for x in glob("Screen Shot*"):
-    source = path+"/"+x
-    destination = "screenshots/"
+    if input() == "y":
+        pass
+    else:
+        sys.exit()
 
-    print(x)
-    shutil.move(source, destination)
+def folder_creation():
+    print("Preparing screenshots folder")
+
+    if os.path.isdir("screenshots"):
+        print("Folder already exists")
+    else:
+        os.makedirs("screenshots")
+        print("Created screenshots folder")
+
+def move_files():
+    for x in glob("Screen Shot*"):
+        source = path+"/"+x
+        destination = "screenshots/"
+
+        print(x)
+        shutil.move(source, destination)
+
+confirmation()
+folder_creation()
+move_files()
 
 print("done")
