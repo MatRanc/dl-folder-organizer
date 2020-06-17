@@ -42,7 +42,7 @@ def move_files():
 
 confirmation()
 folder_creation()
-sleep(5)
+sleep(2)
 move_files()
 
 #check if file is already there
